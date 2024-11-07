@@ -33,3 +33,4 @@ public class Act2_6Ejemplo2 extends Thread{
         h5.start();
     }
 }
+// Se ejecuta de esta manera porque, al haber una cantidad pequeña de hilos, la prioridad no se suele respetar.
