@@ -1,26 +1,25 @@
-package Act3_7;
+package Act3_8;
 
 import java.io.Serializable;
 
-public class Numeros implements Serializable {
-    private static final long serialVersionUID = 1L; // Identificador de versión para serialización.
+public class Numeros3_7Modificada  implements Serializable {
+    private static final long serialVersionUID = 1L;
 
-    private int n;           // El número ingresado.
-    private long cuadrado;   // El cuadrado del número.
-    private long cubo;       // El cubo del número.
+    private int n;           // Número ingresado.
+    private long cuadrado;   // Cuadrado del número.
+    private long cubo;       // Cubo del número.
 
     // Constructor vacío.
-    public Numeros() {
-    }
+    public Numeros3_7Modificada() {}
 
     // Constructor parametrizado.
-    public Numeros(int n, long cuadrado, long cubo) {
+    public Numeros3_7Modificada(int n, long cuadrado, long cubo) {
         this.n = n;
         this.cuadrado = cuadrado;
         this.cubo = cubo;
     }
 
-    // Métodos setters (modificadores).
+    // Métodos setters.
     public void setN(int n) {
         this.n = n;
     }
@@ -33,7 +32,7 @@ public class Numeros implements Serializable {
         this.cubo = cubo;
     }
 
-    // Métodos getters (accesores).
+    // Métodos getters.
     public int getN() {
         return n;
     }

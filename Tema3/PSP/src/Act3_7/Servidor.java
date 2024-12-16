@@ -13,32 +13,50 @@ public class Servidor {
         int puerto = 49153; // Puerto en el que escuchará el servidor.
 
         try {
-            ServerSocket servidor = new ServerSocket(puerto); // Crea un socket para aceptar conexiones.
+            // Crea un socket servidor en el puerto especificado.
+            ServerSocket servidor = new ServerSocket(puerto);
             System.out.println("Esperando al cliente...");
-            Socket cliente = servidor.accept(); // Acepta la conexión entrante.
 
-            // Flujos para enviar y recibir datos al/del cliente.
-            ObjectInputStream flujoEntrada = new ObjectInputStream(cliente.getInputStream());
+            // Espera y acepta la conexión de un cliente.
+            Socket cliente = servidor.accept();
+            System.out.println("Cliente conectado.");
+
+            // Inicializa los flujos de entrada y salida para recibir/enviar objetos.
             ObjectOutputStream flujoSalida = new ObjectOutputStream(cliente.getOutputStream());
+            ObjectInputStream flujoEntrada = new ObjectInputStream(cliente.getInputStream());
 
-            Numeros numero = (Numeros) flujoEntrada.readObject(); // Variable para almacenar los mensajes recibidos.
+            // Bucle principal: recibe números del cliente hasta que se envía un número <= 0.
+            Numeros numero = (Numeros) flujoEntrada.readObject(); // Recibe el primer objeto Numeros.
+            int n = numero.getN();
 
-            // Bucle para procesar mensajes hasta recibir "*".
-            while (numero.getN()>=0) {
-                numero.setCuadrado(numero.getN()*numero.getN());
-                numero.setCubo(numero.getN()*numero.getN()*numero.getN());
-                flujoSalida.writeUTF(numero.toString()); // Responde con la cadena en mayúsculas.
-                System.out.println("Número recibido: " + numero.getN()); // Imprime el mensaje recibido.
+            while (n > 0) {
+                // Calcula el cuadrado y el cubo del número recibido.
+                numero.setCuadrado(n * n);
+                numero.setCubo((long) n * n * n);
+
+                // Envía el objeto modificado de vuelta al cliente.
+                flujoSalida.writeObject(numero);
+
+                // Imprime en el servidor los datos recibidos y calculados.
+                System.out.println("Número recibido: " + numero.getN());
+                System.out.println("Cuadrado: " + numero.getCuadrado());
+                System.out.println("Cubo: " + numero.getCubo());
+
+                // Espera el siguiente objeto enviado por el cliente.
+                numero = (Numeros) flujoEntrada.readObject();
+                n = numero.getN();
             }
 
-            // Cierra los flujos y el socket.
+            // Cierra los flujos y los sockets.
             flujoSalida.close();
             flujoEntrada.close();
             cliente.close();
             servidor.close();
+            System.out.println("Servidor finalizado.");
 
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Captura y muestra cualquier error.
         }
     }
 }
+
