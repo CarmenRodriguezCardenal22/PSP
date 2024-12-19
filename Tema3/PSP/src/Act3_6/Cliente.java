@@ -37,7 +37,7 @@ public class Cliente {
             cliente.close();
 
         } catch (Exception e) {
-            e.printStackTrace(); 
+            e.printStackTrace();
         }
     }
 }

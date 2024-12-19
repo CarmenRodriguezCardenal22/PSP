@@ -1,6 +1,8 @@
 package Act3_8;
 
-public class Alumno {
+import java.io.Serializable;
+
+public class Alumno implements Serializable {
     String idAlumno, nombre;
     Curso curso;
     int nota;
@@ -11,6 +13,13 @@ public class Alumno {
         this.nombre = nombre;
         this.curso = curso;
         this.nota = nota;
+    }
+
+    public Alumno(String idAlumno) {
+        this.idAlumno = idAlumno;
+        this.nombre = "No existe";
+        this.curso = new Curso("No existe", "No existe");
+        this.nota = -1;
     }
 
     public String getIdAlumno() {

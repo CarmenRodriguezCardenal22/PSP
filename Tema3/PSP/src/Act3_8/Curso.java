@@ -1,6 +1,8 @@
 package Act3_8;
 
-public class Curso {
+import java.io.Serializable;
+
+public class Curso implements Serializable {
     String id, descripcion;
 
     public Curso() {}
