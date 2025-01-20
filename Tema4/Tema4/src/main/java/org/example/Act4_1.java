@@ -6,15 +6,15 @@ import org.apache.commons.net.ftp.FTPFile;
 public class Act4_1 {
     public static void main(String[] args) {
         FTPClient cliente = new FTPClient();
-        String servFTP = "ftp.rediris.es";
+        String servFTP = "ftp.uv.es";
         System.out.println("Nos conectamos a: " + servFTP);
-        String ususrio = "anonymous";
+        String usuario = "anonymous";
         String clave = "anonymous";
         try{
             cliente.connect(servFTP);
             cliente.enterLocalPassiveMode();
 
-            boolean login = cliente.login(ususrio, clave);
+            boolean login = cliente.login(usuario, clave);
             if(login){
                 System.out.println("Login correcto...");
             }
@@ -59,8 +59,6 @@ public class Act4_1 {
                 System.out.println("\t" + files3[j].getName() + " => " + tipos[files3[j].getType()]);
             }
 
-
-
             boolean logout = cliente.logout();
             if(logout){
                 System.out.println("Logout del servidor FTP...");
@@ -74,5 +72,7 @@ public class Act4_1 {
         catch (Exception e){
             e.printStackTrace();
         }
+
+        
     }
 }
