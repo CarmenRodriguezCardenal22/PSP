@@ -24,6 +24,16 @@ public class Act5_2Ejemplo6 {
             //Se calcula el resumen del String leido del fichero
             md.update(datos.getBytes());
             byte resumenActual[] = md.digest();
+
+            //Se comprueban los dos resumenes
+            if(MessageDigest.isEqual(resumenActual, resumenOriginal)){
+                System.out.println("DATOS VÁLIDOS");
+            }
+            else{
+                System.out.println("DATOS NO VÁLIDOS");
+            }
+            dataOS.close();
+            fileout.close();
         }
         catch (Exception e){
             System.out.println(e.getMessage());
