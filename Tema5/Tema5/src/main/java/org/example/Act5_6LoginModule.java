@@ -44,10 +44,10 @@ public class Act5_6LoginModule implements LoginModule {
     //metodo login
     @Override
     public boolean login() throws LoginException {
-        System.out.println("🔍 Iniciando proceso de login...");
+        boolean autenticado = true;
 
         if (callbackHandler == null) {
-            throw new LoginException("❌ Se necesita CallbackHandler");
+            throw new LoginException("Se necesita CallbackHandler");
         }
 
         Callback[] callbacks = new Callback[2];
@@ -55,30 +55,22 @@ public class Act5_6LoginModule implements LoginModule {
         callbacks[1] = new PasswordCallback("Clave: ", false);
 
         try {
-            System.out.println("📌 Llamando a handle() en CallbackHandler...");
+            //Se invoca al CallbackHandler
             callbackHandler.handle(callbacks);
 
-            String usuario = ((NameCallback) callbacks[0]).getName();
+            usuario = ((NameCallback) callbacks[0]).getName();
             char[] passw = ((PasswordCallback) callbacks[1]).getPassword();
             clave = new String(passw);
 
-            System.out.println("📌 Usuario recibido en LoginModule: " + usuario);
-            System.out.println("📌 Clave recibida en LoginModule: " + clave);
-
-            boolean autenticado = ("pedro".equalsIgnoreCase(usuario) && "abcd".equals(new String(passw)));
-
-            if (autenticado) {
-                System.out.println("✅ Autenticación exitosa.");
-            } else {
-                System.out.println("❌ Autenticación fallida.");
-            }
-
-            return autenticado;
+            //La autenticacion se realiza aqui
+            boolean autenticado1 = ("pedro".equalsIgnoreCase(usuario) && "abcd".equals(clave));
+            boolean autenticado2 = ("maria".equalsIgnoreCase(usuario) && "1234".equals(clave));
+            autenticado = autenticado1 || autenticado2;
         } catch (Exception e) {
-            System.err.println("❌ ERROR en login()");
+            System.err.println("ERROR en login()");
             e.printStackTrace();
         }
-        return false;
+        return autenticado;
     }
     //Finalizar la sesion del usuario
     //Este metodo elimina el principal que se añadio en commit
