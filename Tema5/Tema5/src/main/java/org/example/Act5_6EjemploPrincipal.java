@@ -2,11 +2,11 @@ package org.example;
 
 import java.security.Principal;
 
-public class Act5_6 implements Principal, java.io.Serializable {
+public class Act5_6EjemploPrincipal implements Principal, java.io.Serializable {
     private String name; //nombre del principal
 
     //crea un EjemploPrincipal con el nombre suministrado
-    public Act5_6(String nombre) {
+    public Act5_6EjemploPrincipal(String nombre) {
         if(nombre == null) {
             throw new NullPointerException("Entrada nula");
         }
@@ -25,10 +25,10 @@ public class Act5_6 implements Principal, java.io.Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Act5_6)) {
+        if (!(o instanceof Act5_6EjemploPrincipal)) {
             return false;
         }
-        Act5_6 act = (Act5_6) o;
+        Act5_6EjemploPrincipal act = (Act5_6EjemploPrincipal) o;
         if (this.getName().equals(act.getName())) {
             return true;
         }

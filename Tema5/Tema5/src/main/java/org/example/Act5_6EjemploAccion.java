@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.security.PrivilegedAction;
 
-public class Act5_6Main implements PrivilegedAction {
+public class Act5_6EjemploAccion implements PrivilegedAction {
     @Override
     public Object run() {
         File f = new File("fichero.txt");
